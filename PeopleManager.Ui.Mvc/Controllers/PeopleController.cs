@@ -84,5 +84,44 @@ namespace PeopleManager.Ui.Mvc.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var person = _dbContext.People.Find(id);
+
+            if (person is null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(person);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            //var person = _dbContext.People.Find(id);
+
+            //if (person is null)
+            //{
+            //    return RedirectToAction("Index");
+            //}
+
+            var person = new Person { 
+                Id = id ,
+                FirstName = string.Empty, 
+                LastName = string.Empty,
+                Email = string.Empty,
+                Description = string.Empty
+            };
+
+            _dbContext.People.Attach(person);
+
+            _dbContext.People.Remove(person);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
