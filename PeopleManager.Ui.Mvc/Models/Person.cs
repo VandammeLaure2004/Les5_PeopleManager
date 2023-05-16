@@ -9,6 +9,7 @@ namespace PeopleManager.Ui.Mvc.Models
 
         [Display(Name="First Name")]
         [Required]
+        //[MinLength(3)] attribut
         public required string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
