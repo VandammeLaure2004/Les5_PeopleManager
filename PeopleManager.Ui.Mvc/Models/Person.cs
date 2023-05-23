@@ -23,5 +23,7 @@ namespace PeopleManager.Ui.Mvc.Models
 
         [Display(Name = "Description")]
         public string? Description { get; set; }
+
+        public IList<Vehicle> ResponsibleForVehicles { get; set; } = new List<Vehicle>();
     }
 }

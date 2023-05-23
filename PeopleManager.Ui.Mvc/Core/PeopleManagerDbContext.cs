@@ -12,6 +12,18 @@ namespace PeopleManager.Ui.Mvc.Core
         }
 
         public DbSet<Person> People => Set<Person>();
+        public DbSet<Vehicle> Vehicles => Set<Vehicle>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.ResponsiblePerson)
+                .WithMany(p => p.ResponsibleForVehicles)
+                .HasForeignKey(v => v.ResponsiblePersonId)
+                .IsRequired(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
 
         public void Seed()
         {
